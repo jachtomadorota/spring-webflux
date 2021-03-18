@@ -47,4 +47,17 @@ public class MonoTest {
                 .subscribe();
     }
 
+    //handle error without stack trace of error - show only hardcoded code with handling error
+
+    @Test
+    public void errorResume(){
+        Mono.error(new Exception())
+                .onErrorResume(e ->{
+                    System.out.println("Caught " + e);
+                    return Mono.just("B");
+                })
+                .log()
+                .subscribe();
+    }
+
 }
